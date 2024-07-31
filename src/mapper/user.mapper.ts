@@ -1,8 +1,7 @@
 import {
-  Company,
-  User,
-  UserDetails,
-} from '../db/rdb/repositories/user.repository';
+  UserMongo,
+  User
+} from '../types/user.type'
 import { AuthProviders, UserRoles, UserTypes } from '../constants/enums';
 
 export function mapToUserModel(
@@ -27,28 +26,9 @@ export function mapToUserModel(
   };
 }
 
-// export function mapToUserDetails(
-//     userId
-// ): UserDetails (
-//     return {
-
-//     }
-// )
-
-export function mapToCompanyModel(
-  id: string,
-  userId: string,
-  name: string,
-  type?: string,
-  address?: string,
-  tradeLicenseNo?: string,
-): Company {
+export function mapToMongoUser(email: string, name: string): UserMongo {
   return {
-    id: id,
-    userId: userId,
+    email: email,
     name: name,
-    type: type,
-    address: address,
-    tradeLicenseNo: tradeLicenseNo,
-  };
+  }
 }

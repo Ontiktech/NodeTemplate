@@ -9,7 +9,3 @@ const generateId = () => {
 export function createUserId() {
   return `usr_${generateId()}`;
 }
-
-export function createCompanyId() {
-  return `com_${generateId()}`;
-}

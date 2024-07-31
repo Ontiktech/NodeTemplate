@@ -1,11 +1,9 @@
-import { AuthProviders, RateTypes, UserRoles, UserTypes } from "../../../constants/enums";
 import { UserClient } from "../../../db/clients/postgres.client";
 import { 
     Model,
     DataTypes,
     InferAttributes,
     InferCreationAttributes,
-    Sequelize
  } from "sequelize";
 
 
@@ -73,14 +71,8 @@ class UserDetailsModel extends Model<
     declare userId: string
     declare fullName: string
     declare dob: string
-    declare profession: string
-    declare designation: string
-    declare history: JSON
     declare address: string
     declare country: string
-    declare rate: number
-    declare rateType: string
-    declare token: string
 }
 
 UserDetailsModel.init({
@@ -94,73 +86,15 @@ UserDetailsModel.init({
     dob: {
         type: DataTypes.STRING
     },
-    profession: {
-        type: DataTypes.STRING,
-    },
-    designation: {
-        type:DataTypes.STRING,
-    },
-    history: {
-        type:DataTypes.JSON,
-    },
     address: {
         type:DataTypes.STRING,
     },
     country: {
         type:DataTypes.STRING,
         allowNull: false
-    },
-    rate: {
-        type: DataTypes.DECIMAL
-    },
-    rateType: {
-        type: DataTypes.ENUM(RateTypes.DAILY, RateTypes.HOURLY, RateTypes.WEEKLY, RateTypes.MONTHLY)
-    },
-    token: {
-        type: DataTypes.STRING
     }
 }, {
     tableName: "UserDetails",
-    sequelize,
-    timestamps: true,
-})
-
-class CompanyModel extends Model {
-    declare id: string
-    declare userId: string
-    declare name: string
-    declare type?: string
-    declare address?: string
-    declare tradeLicenseNo?: string
-}
-
-CompanyModel.init({
-   id: {
-    type: DataTypes.STRING,
-    primaryKey: true,
-    allowNull: false
-   },
-   userId: {
-    type: DataTypes.STRING,
-    allowNull: false
-   },
-   name: {
-    type: DataTypes.STRING,
-    allowNull: false
-   },
-   type: {
-    type: DataTypes.STRING,
-    allowNull: true
-   },
-   address: {
-    type: DataTypes.STRING,
-   },
-   tradeLicenseNo: {
-    type: DataTypes.STRING,
-    allowNull: true
-   }
-}, {
-    tableName: "Company",
     sequelize,
     timestamps: true,
 })
@@ -169,6 +103,5 @@ CompanyModel.init({
 
 export {
     UserModel,
-    UserDetailsModel,
-    CompanyModel
+    UserDetailsModel
 }

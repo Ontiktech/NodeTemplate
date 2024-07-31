@@ -1,10 +1,7 @@
 import { UserClient } from "../../../db/clients/postgres.client";
-import { InferAttributes, Sequelize } from "sequelize";
-import { CompanyModel, UserDetailsModel, UserModel } from "../models/user.model";
-
-export type User = InferAttributes<UserModel>
-export type UserDetails = InferAttributes<UserDetailsModel>
-export type Company = InferAttributes<CompanyModel>
+import { Sequelize } from "sequelize";
+import { UserDetailsModel, UserModel } from "../models/user.model";
+import { User } from "types/user.type";
 
 export class UserRepository {
     private sequelize: Sequelize
@@ -64,21 +61,5 @@ export class UserRepository {
                 username: username
             }
         }) as unknown as User
-    }
-
-    async createCompany(company: Company){
-        await CompanyModel.create(company)
-    }
-
-    async getCompanyByUserID(userId: string) {
-        return await CompanyModel.findAll({
-            where: {
-                userId: userId
-            }
-        })
-    }
-
-    async getAllCompanies() {
-        return await CompanyModel.findAll()
     }
 }

@@ -1,16 +1,19 @@
 import {
-  Company,
-  User,
   UserRepository,
 } from '../db/rdb/repositories/user.repository';
-import { mapToCompanyModel } from '../mapper/user.mapper';
-import { createCompanyId } from '../utils/id.utils';
+
+import {
+  UserMongoRepository
+} from '../db/nosql/repository/user.repository'
+import { mapToMongoUser } from '../mapper/user.mapper';
 
 export class UserService {
   private userRepo: UserRepository;
+  private userMongoRepo: UserMongoRepository;
 
   constructor() {
     this.userRepo = new UserRepository();
+    this.userMongoRepo = new UserMongoRepository();
   }
 
   async findUser(id: string) {
@@ -21,26 +24,12 @@ export class UserService {
     return await this.userRepo.getUserDetails(userId);
   }
 
-  async getUserCompany(userId: string) {
-    return await this.userRepo.getCompanyByUserID(userId);
+  async getMongoUser(email: string) {
+    return await this.userMongoRepo.getUser(email);
   }
 
-  async createCompany(
-    userId: string,
-    name: string,
-    type?: string,
-    address?: string,
-    tradeLicenseNo?: string,
-  ) {
-    const companyId = createCompanyId();
-    const company: Company = mapToCompanyModel(
-      companyId,
-      userId,
-      name,
-      type,
-      address,
-      tradeLicenseNo,
-    );
-    await this.userRepo.createCompany(company);
+  async createMongoUser(email: string, name: string) {
+    const user = mapToMongoUser(email, name)
+    await this.userMongoRepo.createUser(user)
   }
 }

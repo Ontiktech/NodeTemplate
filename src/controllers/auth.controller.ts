@@ -11,13 +11,10 @@ export async function authenticate(req: Request, res: Response) {
   console.log('response', response);
   if (
     response.authenticated &&
-    response.userInfo &&
-    response.userInfo.username !== undefined &&
-    response.userInfo.types !== undefined
+    response.userInfo
   ) {
     const token = generateToken({
-      username: response.userInfo.username,
-      type: response.userInfo.types,
+      value: "VALUE WE WANT"
     });
     res.send({
       userInfo: response.userInfo,

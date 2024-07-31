@@ -5,7 +5,6 @@ import { hashPassword } from '../utils/password.utils';
 import { createUserId } from '../utils/id.utils';
 import { RegistrationRequestSchema } from '../schema/user.schema';
 import { UserMongoRepository } from '../db/nosql/repository/user.repository';
-import { User } from '../types/user.type';
 
 export class AuthService {
   private userRepo: UserRepository;
@@ -17,7 +16,7 @@ export class AuthService {
   }
 
   async authenticate(request: RegistrationRequestSchema) {
-    let userInfo: User | null = null;
+    let userInfo  = null
     if (
       request.email &&
       request.password &&
@@ -25,12 +24,9 @@ export class AuthService {
       request.email !== '' &&
       request.password !== ''
     ) {
-      // userInfo = await this.loginWithEmail(request.email, request.password, request.username)
+      userInfo = await this.loginWithEmail(request.email, request.password, request.username)
     } else if (request.phone && request.username && request.phone !== '') {
       userInfo = await this.loginWithPhone(request.phone, request.username);
-    } else if (request.provider && request.token && request.username) {
-      console.log('inside social auth');
-      // userInfo = await this.loginWithSocialAuth(request.provider, request.token, request.username)
     } else {
       return {
         userInfo: null,
@@ -64,11 +60,14 @@ export class AuthService {
       const rdsUser = await this.userRepo.createUser(newUser)
       const mongoUser = await this.userMongoRepo.createUser(newMongoUser)
       return {
-        rdsUser,
-        mongoUser
+        user: rdsUser,
+        otherUser: mongoUser
       }
     } else {
-      return user;
+      return {
+        user: user,
+        otherUser: null
+      };
     }
   }
 
@@ -89,7 +88,10 @@ export class AuthService {
       );
       return await this.userRepo.createUser(newUser);
     } else {
-      return user;
+      return {
+        user: user,
+        otherUser: null
+      };
     }
   }
 }

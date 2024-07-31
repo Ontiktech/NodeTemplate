@@ -1,0 +1,36 @@
+export enum UserRoles {
+  ERP_RETAILER = 'ERP_RETAILER',
+  ERP_CONSUMER = 'ERP_CONSUMER',
+  ERP_DEALER = 'ERP_DEALER',
+  ERP_SUPPLIER = 'ERP_SUPPLIER',
+  ED_TEACHER = 'ED_TEACHER',
+  ED_STUDENT = 'ED_STUDENT',
+  MED_DOCTOR = 'MED_DOCTOR',
+  MED_PATIENT = 'MED_PATIENT',
+  MED_ASSISTANT = 'MED_ASSISTANT',
+  LEGAL_ADVISOR = 'LEGAL_ADVISOR',
+  DEFAULT = 'DEFAULT',
+}
+
+export enum UserTypes {
+  EDUCATION = 'EDUCATION',
+  MEDICAL = 'MEDICAL',
+  ERP = 'ERP',
+  LEGAL = 'LEGAL',
+  DEFAULT = 'DEFAULT',
+}
+
+export enum RateTypes {
+  HOURLY = 'HOURLY',
+  DAILY = 'DAILY',
+  WEEKLY = 'WEEKLY',
+  MONTHLY = 'MONTHLY',
+}
+
+export enum AuthProviders {
+  GOOGLE = 'GOOGLE',
+  FACEBOOK = 'FACEBOOK',
+  X = 'X',
+  PHONE = 'PHONE',
+  EMAIL = 'EMAIL',
+}

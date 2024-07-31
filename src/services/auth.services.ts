@@ -1,0 +1,101 @@
+import { AuthProviders } from '../constants/enums';
+import { User, UserRepository } from '../db/rdb/repositories/user.repository';
+import { mapToUserModel } from '../mapper/user.mapper';
+import { hashPassword } from '../utils/password.utils';
+import { createUserId } from '../utils/id.utils';
+import { RegistrationRequestSchema } from '../schema/user.schema';
+
+export class AuthService {
+  private userRepo: UserRepository;
+
+  constructor() {
+    this.userRepo = new UserRepository();
+  }
+
+  async authenticate(request: RegistrationRequestSchema) {
+    let userInfo: User | null = null;
+    if (
+      request.email &&
+      request.password &&
+      request.username &&
+      request.email !== '' &&
+      request.password !== ''
+    ) {
+      // userInfo = await this.loginWithEmail(request.email, request.password, request.username)
+    } else if (request.phone && request.username && request.phone !== '') {
+      userInfo = await this.loginWithPhone(request.phone, request.username);
+    } else if (request.provider && request.token && request.username) {
+      console.log('inside social auth');
+      // userInfo = await this.loginWithSocialAuth(request.provider, request.token, request.username)
+    } else {
+      return {
+        userInfo: null,
+        authenticated: false,
+        message: 'invalid request',
+      };
+    }
+    return {
+      userInfo: userInfo,
+      authenticated: true,
+    };
+  }
+
+  async loginWithEmail(email: string, password: string, username: string) {
+    const user = await this.userRepo.findUserByEmail(email);
+
+    if (!user) {
+      const hashedPassword = await hashPassword(password);
+      // const newUser = mapToUserModel({
+      //     id: createUserId(),
+      //     email: email,
+      //     username: username,
+      //     password: hashedPassword,
+      //     providers: [AuthProviders.EMAIL],
+      // })
+      // return await this.userRepo.createUser({newUser})
+    } else {
+      return user;
+    }
+  }
+
+  async loginWithPhone(phone: string, username: string) {
+    const user = await this.userRepo.findUserByPhone(phone);
+    const id = createUserId();
+    console.log('user', user);
+    if (!user) {
+      const newUser = mapToUserModel(
+        id,
+        username,
+        '',
+        '',
+        phone,
+        '',
+        '',
+        AuthProviders.PHONE,
+      );
+      return await this.userRepo.createUser(newUser);
+    } else {
+      return user;
+    }
+  }
+
+  async loginWithSocialAuth(
+    providerName: string,
+    token: string,
+    username: string,
+  ) {
+    const user = await this.userRepo.findByProvider(username);
+    console.log('user', user);
+    if (!user) {
+      // const newUser = mapToUserModel({
+      //     id: createUserId(),
+      //     providers: [providerName],
+      //     username: username,
+      // })
+      // console.log('new user', newUser)
+      // return await this.userRepo.createUser(newUser)
+    } else {
+      return user;
+    }
+  }
+}

@@ -1900,6 +1900,11 @@ expect@^29.0.0, expect@^29.7.0:
     jest-message-util "^29.7.0"
     jest-util "^29.7.0"
 
+express-list-routes@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/express-list-routes/-/express-list-routes-1.2.2.tgz#561fa2ebb587388c233b6728cf96da17e78e1bbb"
+  integrity sha512-CO88emmvEEiRB5erLPpj96Hg4dw6ekngu0RSDnyCwfPfzOLu6MdkhKKsMBGNpW0SNzhP4Y/sulmi0f/bX0CTaw==
+
 express@^4.19.2:
   version "4.19.2"
   resolved "https://registry.yarnpkg.com/express/-/express-4.19.2.tgz#e25437827a3aa7f2a827bc8171bbbb664a356465"

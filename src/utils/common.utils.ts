@@ -5,7 +5,7 @@ dotenv.config();
 
 export function getEnvVar(paramName: string): string {
   const value = process.env[paramName];
-  if (value) {
+  if (value || value === "") {
     return value;
   } else {
     throw new EnvVarNotFoundError(

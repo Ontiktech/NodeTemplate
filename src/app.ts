@@ -4,6 +4,7 @@ import express from 'express';
 import {router} from './routes/index'
 import * as bodyParser from 'body-parser';
 import {connectMongoos} from './db/clients/mondo.client';
+import expressListRoutes from 'express-list-routes';
 
 const numCPUs = os.cpus().length
 
@@ -23,17 +24,20 @@ const server = () => {
         try {
             const app = express()
             const PORT = process.env.PORT || 4001
-            
+
             // parse application/x-www-form-urlencoded
             app.use(bodyParser.urlencoded({ extended: false }))
 
             // parse application/json
             app.use(bodyParser.json())
-    
+
             connectMongoos()
 
-            app.use('/user/api/v1', router)
-    
+            app.use('/api/v1/user', router)
+
+            // List down all routes in the terminal on startup
+            expressListRoutes(app, { prefix: '/' });
+
             app.listen(PORT, () => {
                 console.log(`Worker ${process.pid} started on port ${PORT}`)
             });

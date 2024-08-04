@@ -8,7 +8,7 @@ type FileNameCallback = (error: Error | null, filename: string) => void
 
 type fileFieldNameType = {
   name: string,
-  maxCount: number 
+  maxCount: number
 }[]
 
 type fieldsType = {
@@ -22,35 +22,32 @@ type fieldsType = {
   size: number
 }
 
-type formattedPathsType = {                                                           
+type formattedPathsType = {
   [key: string]: string[]
 }                                                                           
-
-export class FileUploadService {
-  constructor() {}
-
   // FILEFIELDNAME(required), DEFAULT PATH = 'temp' & DEFAULT MAXSIZE = 30 MB
-  async multipleFileUpload(fileFieldName: fileFieldNameType , path = 'temp', maxSize = 31457280) {
+  export const multipleFileLocalUploader = (fileFieldName: fileFieldNameType , path = 'temp', maxSize = 31457280) => {
     const storage = multer.diskStorage({
       // WHERE THE FILE SHOULD BE STORED
       destination: function (req: Request, file: Express.Multer.File, cb: DestinationCallback) {
-        const dir = './public/' + path;
+        const dir = './src/public/' + path;
 
         if (!fs.existsSync(dir))
             fs.mkdirSync(dir, { recursive: true });
 
-        cb(null, 'public/' + path)
+        cb(null, dir)
       },
       // LOGIC FOR SETTING THE FILENAME USED TO STORE THE FILE
       filename: function (req: Request, file: Express.Multer.File, cb: FileNameCallback) {
         const randomNum = Math.floor(Math.random() * (9999 - 1000 + 1) + 1000)
         const filename = Date.now() + randomNum + '-' + file.originalname.trim().replaceAll(' ', '_')
+
         cb(null, filename)
       }
     })
 
     // LOGIC FOR IF THE FILE SHOULD BE ALLOWED TO BE UPLOADED OR NOT 
-    const multipleFileDelayedValidationFilter = (req: Request, file: Express.Multer.File, cb: FileFilterCallback) => {
+    const additionalValidation = (req: Request, file: Express.Multer.File, cb: FileFilterCallback) => {
       const fileSize = parseInt(req.headers["content-length"]!)
       if(fileSize > maxSize){
         req.body.file_upload_status = 'File too big to be uploaded to server'
@@ -64,11 +61,11 @@ export class FileUploadService {
     return multer({
       storage: storage, 
       // limits: limits, 
-      fileFilter: multipleFileDelayedValidationFilter 
+      fileFilter: additionalValidation
     }).fields(fileFieldName)
   }
 
-  async deleteMultipleReqFileHook(req: Request) {
+  export const rollbackMultipleFileLocalUpload = async (req: Request) => {
     if(!Object.keys(req.files!).length)
       return;
 
@@ -91,7 +88,7 @@ export class FileUploadService {
     return;
   }
 
-  async deleteMultipleFile(req: Request, filePaths: string[]){
+  export const deleteMultipleFileLocal = async (req: Request, filePaths: string[]) => {
     if(!filePaths)
       return;
 
@@ -104,19 +101,19 @@ export class FileUploadService {
     return;
   }
 
-  fullPathMultipleResolver(req: Request){
+  export const multipleFileLocalFullPathResolver = (req: Request) => {
     if(!Object.keys(req.files!).length)
       return;
 
     const formatted_paths: formattedPathsType = {};
 
-    Object.entries(req.files!).map(async(element) => {
+    Object.entries(req.files!).map((element) => {
       let paths: Array<string> = [];
       element[1].map((fields: fieldsType) => {
-        console.log('fields', fields);
-        paths = [(process.env.FILE_BASE_URL === '' ? (req.protocol + '://' + req.get('host')) : process.env.FILE_BASE_URL) + 
+        // console.log('fields', fields);
+        paths = [(!process.env.FILE_BASE_URL || process.env.FILE_BASE_URL === '' ? (req.protocol + '://' + req.get('host')) : process.env.FILE_BASE_URL) + 
                 '/' +
-                fields.path.substring(fields.path.indexOf('\\') + 1, fields.path.lastIndexOf('\\')) +
+                fields.path.substring(fields.path.indexOf('\\') + 1, fields.path.lastIndexOf('\\')).replace('public\\', '') +
                 '/' +
                 fields.filename, ...paths]
       })
@@ -126,4 +123,3 @@ export class FileUploadService {
 
     return formatted_paths;
   }
-}

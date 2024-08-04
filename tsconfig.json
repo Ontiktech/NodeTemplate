@@ -12,7 +12,7 @@
     "strict": true,
     "esModuleInterop": true
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/exceptions/BadRequestException.js"],
   "exclude": ["node_modules", "src/**/*.spec.ts"]
 }
 

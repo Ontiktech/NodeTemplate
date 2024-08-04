@@ -3,6 +3,7 @@ import * as os from 'os';
 import express from 'express';
 import {router} from './routes/index'
 import * as bodyParser from 'body-parser';
+import path from 'path';
 import {connectMongoos} from './db/clients/mondo.client';
 import expressListRoutes from 'express-list-routes';
 
@@ -30,6 +31,9 @@ const server = () => {
 
             // parse application/json
             app.use(bodyParser.json())
+
+            //serve static files
+            app.use('/', express.static(path.join(__dirname, '/public')));
 
             connectMongoos()
 

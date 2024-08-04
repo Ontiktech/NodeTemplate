@@ -55,6 +55,7 @@ export class AuthService {
         '',
         '',
         AuthProviders.PHONE,
+        null
       )
       const newMongoUser = mapToMongoUser(email, username)
       const rdsUser = await this.userRepo.createUser(newUser)
@@ -85,6 +86,7 @@ export class AuthService {
         '',
         '',
         AuthProviders.PHONE,
+        null
       );
       return await this.userRepo.createUser(newUser);
     } else {

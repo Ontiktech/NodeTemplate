@@ -13,6 +13,7 @@ export function mapToUserModel(
   roles: string,
   types: string,
   providers: string,
+  images: string[] | null,
 ): User {
   return {
     id: id,
@@ -23,6 +24,7 @@ export function mapToUserModel(
     roles: roles ? [roles] : [UserRoles.DEFAULT],
     types: types ? [types] : [UserTypes.DEFAULT],
     providers: providers ? [providers] : [AuthProviders.EMAIL],
+    images: images && images.length ? images : null
   };
 }
 

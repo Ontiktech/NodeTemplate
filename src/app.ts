@@ -4,8 +4,11 @@ import express from 'express';
 import {router} from './routes/index'
 import * as bodyParser from 'body-parser';
 import path from 'path';
-import {connectMongoos} from './db/clients/mondo.client';
+import cors from 'cors'
+import helmet from "helmet";
+// import {connectMongoos} from './db/clients/mondo.client';
 import expressListRoutes from 'express-list-routes';
+import { corsOptions } from './config/cors';
 
 const numCPUs = os.cpus().length
 
@@ -32,10 +35,16 @@ const server = () => {
             // parse application/json
             app.use(bodyParser.json())
 
+            // CORS protection
+            app.use(cors(corsOptions));
+
+            // For security purposes
+            app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
+
             //serve static files
             app.use('/', express.static(path.join(__dirname, '/public')));
 
-            connectMongoos()
+            // connectMongoos()
 
             app.use('/api/v1/user', router)
 

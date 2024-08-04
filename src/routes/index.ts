@@ -3,7 +3,7 @@ import { router as userRouter } from './user.routes';
 import { router as authRouter } from './auth.routes';
 import { MigrationService } from '../services/migration.services';
 import { multipleFileLocalUploader } from '../middleware/fileUploadLocal.middleware';
-import { fileUploadTest } from '../controllers/test.controller';
+import { fileDeleteTest, fileUploadTest } from '../controllers/test.controller';
 
 const migrationService = new MigrationService();
 
@@ -31,6 +31,7 @@ router.post(
   multipleFileLocalUploader( [{ name: 'images1', maxCount: 1 }, { name: 'images2', maxCount: 2 }], 'files', 31457280 ),
   fileUploadTest
 );
+router.delete('/fileDeleteTest/:id', fileDeleteTest)
 
 router.get('/db/migrate', async (req: Request, res: Response) => {
   try {

@@ -62,4 +62,12 @@ export class UserRepository {
             }
         }) as unknown as User
     }
+
+    async deleteById(id: string): Promise<User> {
+      return await UserModel.destroy({
+          where: {
+              id: id
+          }
+      }) as unknown as User
+  }
 }

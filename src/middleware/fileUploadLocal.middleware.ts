@@ -88,12 +88,13 @@ type formattedPathsType = {
     return;
   }
 
-  export const deleteMultipleFileLocal = async (req: Request, filePaths: string[]) => {
+  export const deleteMultipleFileLocal = async (req: Request, filePaths: string[]|null) => {
     if(!filePaths)
       return;
 
     filePaths.map(async (filePath) => {
-      const tempFilePath = 'public/' + filePath.replace((process.env.FILE_BASE_URL === '' ? (req.protocol + '://' + req.get('host')) : process.env.FILE_BASE_URL) + '/', '')
+      const tempFilePath = 'src/public/' + filePath.replace((!process.env.FILE_BASE_URL || process.env.FILE_BASE_URL === '' ? (req.protocol + '://' + req.get('host')) : process.env.FILE_BASE_URL) + '/', '')
+      console.log(tempFilePath);
       if(fs.existsSync(tempFilePath))
         await fs.unlinkSync(tempFilePath);
     })

@@ -1,0 +1,211 @@
+{
+	"info": {
+		"_postman_id": "cd19de9e-0e57-4d07-a142-8b1d0f966ec0",
+		"name": "Node Template Ridwan Bhai",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32409259"
+	},
+	"item": [
+		{
+			"name": "Tests & Migration",
+			"item": [
+				{
+					"name": "Test",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4001/api/v1/user/db/test",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4001",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"db",
+								"test"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "File Uploads Test",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "New User 1",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test@mail.com",
+									"type": "text"
+								},
+								{
+									"key": "images1",
+									"type": "file",
+									"src": "/C:/Users/amarn/Downloads/cat_gun.jpg"
+								},
+								{
+									"key": "images2",
+									"type": "file",
+									"src": "/C:/Users/amarn/Downloads/cat_gun.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4001/api/v1/user/fileUploadTest/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4001",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"fileUploadTest",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "File Delete Test",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "New User 1",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test@mail.com",
+									"type": "text"
+								},
+								{
+									"key": "images1",
+									"type": "file",
+									"src": "/C:/Users/amarn/Downloads/cat_gun.jpg"
+								},
+								{
+									"key": "images2",
+									"type": "file",
+									"src": "/C:/Users/amarn/Downloads/cat_gun.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4001/api/v1/user/fileDeleteTest/usr_zsHndQus1F",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4001",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"fileDeleteTest",
+								"usr_zsHndQus1F"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Run migration",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4001/api/v1/user/db/migrate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4001",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"db",
+								"migrate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Public Route",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4001/api/v1/user/hello",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"api",
+						"v1",
+						"user",
+						"hello"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

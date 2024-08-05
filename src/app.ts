@@ -6,7 +6,7 @@ import * as bodyParser from 'body-parser';
 import path from 'path';
 import cors from 'cors'
 import helmet from "helmet";
-// import {connectMongoos} from './db/clients/mondo.client';
+import {connectMongoos} from './db/clients/mondo.client';
 import expressListRoutes from 'express-list-routes';
 import { corsOptions } from './config/cors.config';
 import { globalLimiterOptions } from './config/globalRateLimiter.config';
@@ -48,7 +48,7 @@ const server = () => {
             //rate limiter
             app.use(globalLimiterOptions)
 
-            // connectMongoos()
+            connectMongoos()
 
             app.use('/api/v1/user', router)
 

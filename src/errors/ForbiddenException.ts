@@ -1,7 +1,9 @@
-export class ForbiddenException extends Error {
+import { CustomException } from "./CustomException";
+
+export class ForbiddenException extends CustomException {
   statusCode = 403;
   constructor(message: string) {
-    super(message);
+    super(message, 403);
     Object.setPrototypeOf(this, ForbiddenException.prototype);
     this.name = this.constructor.name;
   }

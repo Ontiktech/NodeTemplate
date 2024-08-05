@@ -9,14 +9,14 @@ const testService = new TestService();
 
 export async function fileUploadTest(req: Request, res: Response) {
   try {
-    // throw new BadRequestException('Bad request exception thrown') // Will run "rollbackMultipleFileLocalUpload" and delete files automatically
+    throw new BadRequestException('Bad request exception thrown') // Will run "rollbackMultipleFileLocalUpload" and delete files automatically
 
     if(req.body.file_upload_status)
       throw new BadRequestException(req.body.file_upload_status)
 
     // fullPathSingleResolver JUST RETURN A STRING BASED ON WHAT IS IN req.body.file
     const fullPath = multipleFileLocalFullPathResolver(req)
-    const images = fullPath && Object.keys(fullPath).length ? [...fullPath.images1, ...fullPath.images2] : null
+    const images = fullPath && Object.keys(fullPath!).length ? [...fullPath!.images1, ...fullPath!.images2] : null
 
     await testService.createUserWithImages(req.body.username, req.body.password, req.body.username, images);
 
@@ -26,7 +26,7 @@ export async function fileUploadTest(req: Request, res: Response) {
 
     await rollbackMultipleFileLocalUpload(req)
 
-    if(e instanceof BadRequestException){
+    if(e instanceof CustomException){
       return res.status(e.statusCode).json({ message : e.message, code : e.statusCode })
     }
 
@@ -44,7 +44,7 @@ export const fileDeleteTest = async (req: Request, res: Response) => {
 
   } catch (e: any) {
 
-    if(e instanceof BadRequestException || e instanceof NotFoundException || e instanceof CustomException){
+    if(e instanceof CustomException){
       return res.status(e.statusCode).json({ message : e.message, code : e.statusCode })
     }
 

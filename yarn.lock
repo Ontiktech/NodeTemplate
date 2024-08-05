@@ -1980,6 +1980,11 @@ express-list-routes@^1.2.2:
   resolved "https://registry.yarnpkg.com/express-list-routes/-/express-list-routes-1.2.2.tgz#561fa2ebb587388c233b6728cf96da17e78e1bbb"
   integrity sha512-CO88emmvEEiRB5erLPpj96Hg4dw6ekngu0RSDnyCwfPfzOLu6MdkhKKsMBGNpW0SNzhP4Y/sulmi0f/bX0CTaw==
 
+express-rate-limit@^7.4.0:
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/express-rate-limit/-/express-rate-limit-7.4.0.tgz#5db412b8de83fa07ddb40f610c585ac8c1dab988"
+  integrity sha512-v1204w3cXu5gCDmAvgvzI6qjzZzoMWKnyVDk3ACgfswTQLYiGen+r8w0VnXnGMmzEN/g8fwIQ4JrFFd4ZP6ssg==
+
 express@4.17.6:
   version "4.17.3"
   resolved "https://registry.yarnpkg.com/express/-/express-4.17.3.tgz#f6c7302194a4fb54271b73a1fe7a06478c8f85a1"

@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { multipleFileLocalFullPathResolver, rollbackMultipleFileLocalUpload } from '../middleware/fileUploadLocal.middleware';
-import { BadRequestException } from '../errors/BadRequestException';
+import { BadRequestException } from '../errors/BadRequestException.error';
 import { TestService } from '../services/tests.services';
-import { CustomException } from '../errors/CustomException';
+import { CustomException } from '../errors/CustomException.error';
 
 const testService = new TestService();
 

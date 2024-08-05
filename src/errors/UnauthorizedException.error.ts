@@ -1,4 +1,4 @@
-import { CustomException } from "./CustomException";
+import { CustomException } from "./CustomException.error";
 
 export class UnauthorizedException extends CustomException {
   statusCode = 401;

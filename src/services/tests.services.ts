@@ -7,8 +7,8 @@ import { mapToUserModel } from '../mapper/user.mapper';
 import { hashPassword } from '../utils/password.utils';
 import { AuthProviders } from '../constants/enums';
 import { deleteMultipleFileLocal } from '../middleware/fileUploadLocal.middleware';
-import { CustomException } from '../errors/CustomException';
-import { NotFoundException } from '../errors/NotFoundException';
+import { CustomException } from '../errors/CustomException.error';
+import { NotFoundException } from '../errors/NotFoundException.error';
 
 export class TestService {
   private userRepo: UserRepository;

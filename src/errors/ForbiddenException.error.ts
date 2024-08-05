@@ -1,4 +1,4 @@
-import { CustomException } from "./CustomException";
+import { CustomException } from "./CustomException.error";
 
 export class ForbiddenException extends CustomException {
   statusCode = 403;

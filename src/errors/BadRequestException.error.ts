@@ -1,4 +1,4 @@
-import { CustomException } from "./CustomException";
+import { CustomException } from "./CustomException.error";
 
 export class BadRequestException extends CustomException {
   statusCode = 400;

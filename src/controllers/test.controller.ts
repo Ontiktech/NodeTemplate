@@ -2,14 +2,13 @@ import { Request, Response } from 'express';
 import { multipleFileLocalFullPathResolver, rollbackMultipleFileLocalUpload } from '../middleware/fileUploadLocal.middleware';
 import { BadRequestException } from '../errors/BadRequestException';
 import { TestService } from '../services/tests.services';
-import { NotFoundException } from '../errors/NotFoundException';
 import { CustomException } from '../errors/CustomException';
 
 const testService = new TestService();
 
 export async function fileUploadTest(req: Request, res: Response) {
   try {
-    throw new BadRequestException('Bad request exception thrown') // Will run "rollbackMultipleFileLocalUpload" and delete files automatically
+    // throw new BadRequestException('Bad request exception thrown') // Will run "rollbackMultipleFileLocalUpload" and delete files automatically
 
     if(req.body.file_upload_status)
       throw new BadRequestException(req.body.file_upload_status)

@@ -4,12 +4,12 @@ import { Request, Response } from 'express';
 const userService = new UserService();
 
 export async function getUser(req: Request, res: Response) {
-  const email = req.query.email as string
+  const email = req.query.email as string;
   const user = userService.findUser(req.body.id);
-  const mongoUser = userService.getMongoUser(email)
+  const mongoUser = userService.getMongoUser(email);
   res.send({
     user,
-    mongoUser
+    mongoUser,
   });
 }
 

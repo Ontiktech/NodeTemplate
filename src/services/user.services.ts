@@ -1,10 +1,6 @@
-import {
-  UserRepository,
-} from '../db/rdb/repositories/user.repository';
+import { UserRepository } from '../db/rdb/repositories/user.repository';
 
-import {
-  UserMongoRepository
-} from '../db/nosql/repository/user.repository'
+import { UserMongoRepository } from '../db/nosql/repository/user.repository';
 import { mapToMongoUser } from '../mapper/user.mapper';
 
 export class UserService {
@@ -29,7 +25,7 @@ export class UserService {
   }
 
   async createMongoUser(email: string, name: string) {
-    const user = mapToMongoUser(email, name)
-    await this.userMongoRepo.createUser(user)
+    const user = mapToMongoUser(email, name);
+    await this.userMongoRepo.createUser(user);
   }
 }

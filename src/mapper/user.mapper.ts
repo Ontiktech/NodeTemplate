@@ -1,7 +1,4 @@
-import {
-  UserMongo,
-  User
-} from '../types/user.type'
+import { UserMongo, User } from '../types/user.type';
 import { AuthProviders, UserRoles, UserTypes } from '../constants/enums';
 
 export function mapToUserModel(
@@ -30,5 +27,5 @@ export function mapToMongoUser(email: string, name: string): UserMongo {
   return {
     email: email,
     name: name,
-  }
+  };
 }

@@ -9,12 +9,9 @@ export async function authenticate(req: Request, res: Response) {
 
   const response = await authService.authenticate(req.body);
   console.log('response', response);
-  if (
-    response.authenticated &&
-    response.userInfo
-  ) {
+  if (response.authenticated && response.userInfo) {
     const token = generateToken({
-      value: "VALUE WE WANT"
+      value: 'VALUE WE WANT',
     });
     res.send({
       userInfo: response.userInfo,

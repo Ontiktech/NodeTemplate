@@ -2,29 +2,11 @@
 import fs from "fs"
 import multer, { FileFilterCallback } from "multer"
 import { Request } from 'express'
+import { fieldsType, fileFieldNameType, formattedPathsType } from "types/file.types"
 
 type DestinationCallback = (error: Error | null, destination: string) => void
 type FileNameCallback = (error: Error | null, filename: string) => void
 
-type fileFieldNameType = {
-  name: string,
-  maxCount: number
-}[]
-
-type fieldsType = {
-  fieldname: string,
-  originalname: string,
-  encoding: string,
-  mimetype: string,
-  destination: string,
-  filename: string,
-  path: string,
-  size: number
-}
-
-type formattedPathsType = {
-  [key: string]: string[]
-}                                                                           
   // FILEFIELDNAME(required), DEFAULT PATH = 'temp' & DEFAULT MAXSIZE = 30 MB
   export const multipleFileLocalUploader = (fileFieldName: fileFieldNameType , path = 'temp', maxSize = 31457280) => {
     const storage = multer.diskStorage({

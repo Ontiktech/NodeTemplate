@@ -22,7 +22,7 @@ class UserModel extends Model<
     declare types?: [string]
     declare providers?: [string]
     declare token?: string
-    declare images: string[] | null
+    declare images: string[]
 }
 
 UserModel.init({
@@ -61,8 +61,7 @@ UserModel.init({
     },
     images: {
       type: DataTypes.JSON,
-      allowNull: true,
-      defaultValue: null,
+      allowNull: true
     },
 }, {
     tableName: "User",

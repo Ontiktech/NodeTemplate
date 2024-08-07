@@ -98,7 +98,7 @@ export const rollbackMultipleFileLocalUpload = async (req: Request) => {
 
 export const deleteMultipleFileLocal = async (
   req: Request,
-  filePaths: string[] | null,
+  filePaths: [string],
 ) => {
   if (!filePaths) return;
 

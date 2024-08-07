@@ -30,12 +30,9 @@ export async function fileUploadTest(req: Request, res: Response) {
       images,
     );
 
-    res
-      .status(201)
-      .json({
-        message:
-          'Success. Check the public/{folderName} to view uploaded file.',
-      });
+    res.status(201).json({
+      message: 'Success. Check the public/{folderName} to view uploaded file.',
+    });
   } catch (e: any) {
     await rollbackMultipleFileLocalUpload(req);
 

@@ -19,7 +19,7 @@ export class TestService {
     username: string,
     password: string,
     email: string,
-    images: string[] | null,
+    images: string[],
   ) {
     const id = createUserId();
     const hashedPassword = await hashPassword(password);

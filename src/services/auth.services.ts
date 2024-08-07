@@ -49,7 +49,6 @@ export class AuthService {
     const id = createUserId();
     if (!user) {
       const hashedPassword = await hashPassword(password);
-
       const newUser = mapToUserModel(
         id,
         username,
@@ -59,10 +58,12 @@ export class AuthService {
         '',
         '',
         AuthProviders.PHONE,
-      );
-      const newMongoUser = mapToMongoUser(email, username);
-      const rdsUser = await this.userRepo.createUser(newUser);
-      const mongoUser = await this.userMongoRepo.createUser(newMongoUser);
+        null
+      )
+
+      const newMongoUser = mapToMongoUser(email, username)
+      const rdsUser = await this.userRepo.createUser(newUser)
+      const mongoUser = await this.userMongoRepo.createUser(newMongoUser)
       return {
         user: rdsUser,
         otherUser: mongoUser,
@@ -89,6 +90,7 @@ export class AuthService {
         '',
         '',
         AuthProviders.PHONE,
+        null
       );
       return await this.userRepo.createUser(newUser);
     } else {

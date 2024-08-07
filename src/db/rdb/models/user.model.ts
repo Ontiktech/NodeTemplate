@@ -4,10 +4,10 @@ import {
     DataTypes,
     InferAttributes,
     InferCreationAttributes,
- } from "sequelize";
+} from "sequelize";
 
 
- const sequelize = UserClient.getInstance()
+const sequelize = UserClient.getInstance()
 
 class UserModel extends Model<
     InferAttributes<UserModel>,
@@ -22,6 +22,7 @@ class UserModel extends Model<
     declare types?: [string]
     declare providers?: [string]
     declare token?: string
+    declare images: string[]
 }
 
 UserModel.init({
@@ -57,7 +58,11 @@ UserModel.init({
     token: {
         type: DataTypes.STRING,
         allowNull: true
-    }
+    },
+    images: {
+      type: DataTypes.JSON,
+      allowNull: true
+    },
 }, {
     tableName: "User",
     sequelize,

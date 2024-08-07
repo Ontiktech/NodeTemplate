@@ -5,13 +5,20 @@ dotenv.config();
 
 export function getEnvVar(paramName: string): string {
   const value = process.env[paramName];
-  if (value) {
-    return value;
-  } else {
+
+  if(!value) {
+      throw new EnvVarNotFoundError(
+        `Environment variable ${paramName} not found`,
+      );
+  }
+
+  if(value === "") {
     throw new EnvVarNotFoundError(
-      `Environment variable ${paramName} not found`,
+      `Environment variable ${paramName} is empty`,
     );
   }
+
+  return value;
 }
 
 export function delay(ms: number): Promise<void> {

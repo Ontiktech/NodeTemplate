@@ -6,16 +6,14 @@ dotenv.config();
 export function getEnvVar(paramName: string): string {
   const value = process.env[paramName];
 
-  if(!value) {
-      throw new EnvVarNotFoundError(
-        `Environment variable ${paramName} not found`,
-      );
+  if (!value) {
+    throw new EnvVarNotFoundError(
+      `Environment variable ${paramName} not found`,
+    );
   }
 
-  if(value === "") {
-    throw new EnvVarNotFoundError(
-      `Environment variable ${paramName} is empty`,
-    );
+  if (value === '') {
+    throw new EnvVarNotFoundError(`Environment variable ${paramName} is empty`);
   }
 
   return value;

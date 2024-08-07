@@ -58,12 +58,12 @@ export class AuthService {
         '',
         '',
         AuthProviders.PHONE,
-        null
-      )
+        null,
+      );
 
-      const newMongoUser = mapToMongoUser(email, username)
-      const rdsUser = await this.userRepo.createUser(newUser)
-      const mongoUser = await this.userMongoRepo.createUser(newMongoUser)
+      const newMongoUser = mapToMongoUser(email, username);
+      const rdsUser = await this.userRepo.createUser(newUser);
+      const mongoUser = await this.userMongoRepo.createUser(newMongoUser);
       return {
         user: rdsUser,
         otherUser: mongoUser,
@@ -90,7 +90,7 @@ export class AuthService {
         '',
         '',
         AuthProviders.PHONE,
-        null
+        null,
       );
       return await this.userRepo.createUser(newUser);
     } else {

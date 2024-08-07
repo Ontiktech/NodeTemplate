@@ -6,7 +6,7 @@ export function getDBClient(
   password: string,
   endpoint: string,
 ): Sequelize {
-  if(process.env.APP_ENV === 'local'){
+  if (process.env.APP_ENV === 'local') {
     return new Sequelize(dbName, username, password, {
       host: endpoint,
       dialect: 'postgres',
@@ -28,8 +28,7 @@ export function getDBClient(
       // //   evict: 3000,
       // // },
     });
-  }
-  else{
+  } else {
     return new Sequelize(dbName, username, password, {
       host: endpoint,
       dialect: 'postgres',

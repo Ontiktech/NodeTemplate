@@ -29,10 +29,17 @@ router.get('/db/test', async (req: Request, res: Response) => {
 
 router.post(
   '/fileUploadTest',
-  multipleFileLocalUploader( [{ name: 'images1', maxCount: 1 }, { name: 'images2', maxCount: 2 }], 'files', 31457280 ),
-  fileUploadTest
+  multipleFileLocalUploader(
+    [
+      { name: 'images1', maxCount: 1 },
+      { name: 'images2', maxCount: 2 },
+    ],
+    'files',
+    31457280,
+  ),
+  fileUploadTest,
 );
-router.delete('/fileDeleteTest/:id', fileDeleteTest)
+router.delete('/fileDeleteTest/:id', fileDeleteTest);
 
 router.get('/db/migrate', async (req: Request, res: Response) => {
   try {

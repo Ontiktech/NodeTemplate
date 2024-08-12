@@ -1,6 +1,7 @@
 import cluster from 'cluster';
 import * as os from 'os';
 import express from 'express';
+import http from "http";
 import {router} from './routes/index'
 import * as bodyParser from 'body-parser';
 import path from 'path';
@@ -10,6 +11,7 @@ import {connectMongoos} from './db/clients/mondo.client';
 import expressListRoutes from 'express-list-routes';
 import { corsOptions } from './config/cors.config';
 import { globalLimiterOptions } from './config/globalRateLimiter.config';
+import setupSockerServer from './utils/setupSocketServer';
 
 const numCPUs = os.cpus().length
 
@@ -28,6 +30,7 @@ const server = () => {
     } else {
         try {
             const app = express()
+            const server = http.createServer(app)
             const PORT = process.env.PORT || 4001
 
             // parse application/x-www-form-urlencoded
@@ -42,13 +45,16 @@ const server = () => {
             // For security purposes
             app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 
-            //serve static files
+            // serve static files
             app.use('/', express.static(path.join(__dirname, '/public')));
 
             //rate limiter
             app.use(globalLimiterOptions)
 
             connectMongoos()
+
+            // connect to socket server
+            setupSockerServer(server)
 
             app.use('/api/v1/user', router)
 

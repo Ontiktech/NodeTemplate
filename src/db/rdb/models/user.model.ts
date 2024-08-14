@@ -22,7 +22,7 @@ class UserModel extends Model<
     declare types?: [string]
     declare providers?: [string]
     declare token?: string
-    declare images: string[]
+    declare images: [string]
 }
 
 UserModel.init({

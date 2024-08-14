@@ -4,9 +4,10 @@ import { router as authRouter } from './auth.routes';
 import { MigrationService } from '../services/migration.services';
 import { multipleFileLocalUploader } from '../middleware/fileUploadLocal.middleware';
 import { fileDeleteTest, fileUploadTest } from '../controllers/test.controller';
-import { verifyToken } from 'utils/jwt.utils';
+import { JwtMiddleware } from 'middleware/jwt.middleware';
 
 const migrationService = new MigrationService();
+const jwtMiddleware = new JwtMiddleware()
 
 const router = express.Router();
 
@@ -20,9 +21,9 @@ router.get('/db/test', async (req: Request, res: Response) => {
     res.send({
       message: 'success',
     });
-  } catch (e: any) {
+  } catch (error) {
     res.status(500).send({
-      message: `${e}`,
+      message: `${error}`,
     });
   }
 });
@@ -47,14 +48,14 @@ router.get('/db/migrate', async (req: Request, res: Response) => {
     res.send({
       message: 'success',
     });
-  } catch (e: any) {
+  } catch (error) {
     res.status(500).send({
-      message: `${e}`,
+      message: `${error}`,
     });
   }
 });
 
-router.use('/users', verifyToken, userRouter);
+router.use('/users', jwtMiddleware.verifyToken, userRouter);
 router.use('/auth', authRouter);
 
 export { router };

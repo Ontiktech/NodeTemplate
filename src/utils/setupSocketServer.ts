@@ -17,6 +17,7 @@ interface ServerToClientEvents {
 interface ClientToServerEvents {
   // hello: () => void;
   joinRoom: (roomName: string, user: User) => void;
+  leaveRoom: (roomName: string, user: User) => void;
   sendMessageToServer: (roomName: string, message: string) => void;
 }
 
@@ -90,6 +91,12 @@ const setupSockerServer = (server: http.Server) => {
 
     client.on('joinRoom', async (roomName, user) => {  // To Join a specific room
       await client.join(roomName)
+      const sockets = await io.in(roomName).fetchSockets();
+      console.log('all sockets', roomName, user, sockets, 'socket count', sockets.length);
+    })
+
+    client.on('leaveRoom', async (roomName, user) => {  // To Join a specific room
+      await client.leave(roomName)
       const sockets = await io.in(roomName).fetchSockets();
       console.log('all sockets', roomName, user, sockets, 'socket count', sockets.length);
     })

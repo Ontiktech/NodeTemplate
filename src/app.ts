@@ -1,5 +1,5 @@
-import cluster from 'cluster';
-import * as os from 'os';
+// import cluster from 'cluster';
+// import * as os from 'os';
 import express from 'express';
 import http from "http";
 import {router} from './routes/index'
@@ -13,21 +13,21 @@ import { corsOptions } from './config/cors.config';
 import { globalLimiterOptions } from './config/globalRateLimiter.config';
 import setupSockerServer from './utils/setupSocketServer';
 
-const numCPUs = os.cpus().length
+// const numCPUs = os.cpus().length
 
 const server = () => {
-    if (cluster?.isPrimary) {
-        console.log(`Master ${process.pid} is running`)
+    // if (cluster?.isPrimary) {
+    //     console.log(`Master ${process.pid} is running`)
     
-        // Fork workers.
-        for (let i = 0; i < numCPUs; i++) {
-            cluster.fork()
-        }
+    //     // Fork workers.
+    //     for (let i = 0; i < numCPUs; i++) {
+    //         cluster.fork()
+    //     }
     
-        cluster.on('exit', (worker) => {
-            console.log(`worker ${worker.process.pid} died`)
-        });
-    } else {
+    //     cluster.on('exit', (worker) => {
+    //         console.log(`worker ${worker.process.pid} died`)
+    //     });
+    // } else {
         try {
             const app = express()
             const server = http.createServer(app)
@@ -67,7 +67,7 @@ const server = () => {
         } catch(error) {
             console.log('Error', error)
         }
-    }
+    // }
 }
 
 server()

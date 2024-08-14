@@ -15,7 +15,7 @@ export class UserRepository {
     }
 
     async runMigration() {
-        await this.sequelize.sync({force: true})
+        await this.sequelize.sync({alter: true})
     }
 
     async createUser(user: User): Promise<User> {

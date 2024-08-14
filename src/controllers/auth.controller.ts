@@ -1,7 +1,8 @@
+import { JwtMiddleware } from '../middleware/jwt.middleware';
 import { AuthService } from '../services/auth.services';
 import { Request, Response } from 'express';
-import { generateToken } from '../utils/jwt.utils';
 
+const jwtMiddleware = new JwtMiddleware()
 const authService = new AuthService();
 
 export async function authenticate(req: Request, res: Response) {
@@ -10,7 +11,7 @@ export async function authenticate(req: Request, res: Response) {
   const response = await authService.authenticate(req.body);
   console.log('response', response);
   if (response.authenticated && response.userInfo) {
-    const token = generateToken({
+    const token = jwtMiddleware.generateToken({
       value: 'VALUE WE WANT',
     });
     res.send({

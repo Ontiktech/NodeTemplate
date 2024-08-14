@@ -61,7 +61,6 @@ export class AuthService {
         '',
         '',
         AuthProviders.PHONE,
-        null,
       );
 
       const newMongoUser = mapToMongoUser(email, username);
@@ -94,7 +93,6 @@ export class AuthService {
         '',
         '',
         AuthProviders.PHONE,
-        null,
       );
 
       return await this.userRepo.createUser(newUser);

@@ -17,6 +17,7 @@ export class AuthService {
 
   async authenticate(request: RegistrationRequestSchema) {
     let userInfo = null;
+
     if (
       request.email &&
       request.password &&
@@ -38,6 +39,7 @@ export class AuthService {
         message: 'invalid request',
       };
     }
+
     return {
       userInfo: userInfo,
       authenticated: true,
@@ -47,6 +49,7 @@ export class AuthService {
   async loginWithEmail(email: string, password: string, username: string) {
     const user = await this.userRepo.findUserByEmail(email);
     const id = createUserId();
+
     if (!user) {
       const hashedPassword = await hashPassword(password);
       const newUser = mapToUserModel(
@@ -63,6 +66,7 @@ export class AuthService {
       const newMongoUser = mapToMongoUser(email, username);
       const rdsUser = await this.userRepo.createUser(newUser);
       const mongoUser = await this.userMongoRepo.createUser(newMongoUser);
+
       return {
         user: rdsUser,
         otherUser: mongoUser,
@@ -78,7 +82,7 @@ export class AuthService {
   async loginWithPhone(phone: string, username: string) {
     const user = await this.userRepo.findUserByPhone(phone);
     const id = createUserId();
-    console.log('user', user);
+
     if (!user) {
       const newUser = mapToUserModel(
         id,
@@ -90,6 +94,7 @@ export class AuthService {
         '',
         AuthProviders.PHONE,
       );
+
       return await this.userRepo.createUser(newUser);
     } else {
       return {

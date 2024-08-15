@@ -7,7 +7,7 @@ import { fileDeleteTest, fileUploadTest } from '../controllers/test.controller';
 import { JwtMiddleware } from 'middleware/jwt.middleware';
 
 const migrationService = new MigrationService();
-const jwtMiddleware = new JwtMiddleware()
+const jwtMiddleware = new JwtMiddleware();
 
 const router = express.Router();
 

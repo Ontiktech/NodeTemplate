@@ -2,7 +2,7 @@ import { JwtMiddleware } from '../middleware/jwt.middleware';
 import { AuthService } from '../services/auth.services';
 import { Request, Response } from 'express';
 
-const jwtMiddleware = new JwtMiddleware()
+const jwtMiddleware = new JwtMiddleware();
 const authService = new AuthService();
 
 export async function authenticate(req: Request, res: Response) {

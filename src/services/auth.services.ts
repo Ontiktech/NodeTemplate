@@ -39,7 +39,7 @@ export class AuthService {
         message: 'invalid request',
       };
     }
-    
+
     return {
       userInfo: userInfo,
       authenticated: true,

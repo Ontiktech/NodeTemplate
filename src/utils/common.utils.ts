@@ -5,18 +5,16 @@ dotenv.config();
 
 export function getEnvVar(paramName: string): string {
   const value = process.env[paramName];
-  const exceptionList = ['USER_DB_PASSWORD']
+  const exceptionList = ['USER_DB_PASSWORD'];
 
-  if(!value && value !== "") {
-      throw new EnvVarNotFoundError(
-        `Environment variable ${paramName} not found`,
-      );
+  if (!value && value !== '') {
+    throw new EnvVarNotFoundError(
+      `Environment variable ${paramName} not found`,
+    );
   }
 
-  if(value === "" && !exceptionList.includes(paramName)) {
-    throw new EnvVarNotFoundError(
-      `Environment variable ${paramName} is empty`,
-    );
+  if (value === '' && !exceptionList.includes(paramName)) {
+    throw new EnvVarNotFoundError(`Environment variable ${paramName} is empty`);
   }
 
   return value;

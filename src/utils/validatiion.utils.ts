@@ -6,7 +6,14 @@ export const validateRequestBody =
       schema.parse({ body: req.body });
       next();
     } catch (error: any) {
-      console.log(error);
+      res.status(400).json({
+        status: 'error',
+        message: 'Validation failed',
+        errors: error.errors.map((e: any) => ({
+          path: e.path.join('.'),
+          message: e.message,
+        })),
+      });
     }
   };
 

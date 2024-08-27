@@ -1,6 +1,6 @@
 import { UserClient } from '../../../db/clients/postgres.client';
 import { Sequelize } from 'sequelize';
-import { UserModel, UserDetailsModel, TestModel } from '../models';
+import { UserModel, UserDetailsModel } from '../models';
 import { User } from 'types/user.type';
 
 export class UserRepository {

@@ -1,4 +1,4 @@
-import { UserClient } from "db/clients/postgres.client";
+import { UserClient } from "./../../clients/postgres.client";
 import { 
     Model,
     DataTypes,

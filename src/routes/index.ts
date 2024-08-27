@@ -4,7 +4,7 @@ import { router as authRouter } from './auth.routes';
 import { MigrationService } from '../services/migration.services';
 import { multipleFileLocalUploader } from '../middleware/fileUploadLocal.middleware';
 import { fileDeleteTest, fileUploadTest } from '../controllers/test.controller';
-import { JwtMiddleware } from 'middleware/jwt.middleware';
+import { JwtMiddleware } from '../middleware/jwt.middleware';
 
 const migrationService = new MigrationService();
 const jwtMiddleware = new JwtMiddleware();

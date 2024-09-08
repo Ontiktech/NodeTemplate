@@ -38,7 +38,7 @@ const socketIoServerOptions = {
   },
 };
 
-console.log(socketIoServerOptions);
+// console.log(socketIoServerOptions);
 
 // Setup the server
 const setupSockerServer = (server: http.Server) => {

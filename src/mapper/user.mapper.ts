@@ -10,7 +10,7 @@ export function mapToUserModel(
   roles: string,
   types: string,
   providers: string,
-  images: string[],
+  images: string[] | null,
 ): User {
   return {
     id: id,
